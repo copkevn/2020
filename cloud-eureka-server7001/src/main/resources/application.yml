@@ -1,0 +1,13 @@
+server:
+  port: 7001
+eureka:
+  instance:
+    hostname: localhost # eureka服务端的名称
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000 #清理时间间隔时间
+  client:
+    fetch-registry: false #搜索自己服务，自己没有注册，更不会去搜索自己
+    register-with-eureka: false #不自己注册自己，这是服务端
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
