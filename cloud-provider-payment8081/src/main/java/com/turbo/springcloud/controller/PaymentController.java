@@ -3,7 +3,6 @@ package com.turbo.springcloud.controller;
 import com.turbo.springcloud.entities.CommonResult;
 import com.turbo.springcloud.entities.Payment;
 import com.turbo.springcloud.service.PaymentService;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

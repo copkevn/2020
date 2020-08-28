@@ -2,7 +2,6 @@ package com.turbo.springcloud.service;
 
 import com.turbo.springcloud.entities.Payment;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 /**
  * @ClassName: PaymentService
