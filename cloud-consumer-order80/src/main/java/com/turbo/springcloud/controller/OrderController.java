@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RestController
 @Slf4j
 public class OrderController {
-    public static final String PAYMENT_URL="http://localhost:8001/payment";
+    public static final String PAYMENT_URL="CLOUD-PAYMENT-SERVICE";
 
 //    httpclient   服务之间的调用
 //    restTemplate
@@ -39,13 +39,13 @@ public class OrderController {
     @GetMapping("/creat")
     public CommonResult<Payment> creat(Payment payment){
         log.info("进来了》》》》》》》》》》》》》");
-        return restTemplate.postForObject(PAYMENT_URL+"/creat",payment,CommonResult.class);
+        return restTemplate.postForObject(PAYMENT_URL+"/payment/creat",payment,CommonResult.class);
     }
 
     @GetMapping("/getById/{id}")
     public CommonResult<Payment> getPayMent(@PathVariable("id") Long id){
         log.info("进来查询》》》》》》》》》》》》》》");
-        return restTemplate.getForObject(PAYMENT_URL+"/getById/"+id,CommonResult.class);
+        return restTemplate.getForObject(PAYMENT_URL+"/payment/getById/"+id,CommonResult.class);
     }
 
 }

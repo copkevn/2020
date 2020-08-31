@@ -22,9 +22,9 @@ import javax.annotation.Resource;
 public class PaymentController {
     @Resource
     private PaymentService paymentService;
-
     @Value("${server.port}")
     private String serverPort;
+
 
     @PostMapping("/creat")
     public CommonResult creat(@RequestBody Payment payment){
