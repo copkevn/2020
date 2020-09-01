@@ -5,15 +5,18 @@ import com.turbo.springcloud.entities.Payment;
 import com.turbo.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: PaymentController
  * @Author: HeYong
  * @Date: 2020/8/20 16:40
- * @Description: TODO Description
+ * @Description:
  * @Version: 1.0
  */
 @RestController
@@ -25,6 +28,9 @@ public class PaymentController {
 
     @Value("${server.port}")
     private String serverPort;
+
+    @Resource
+    private DiscoveryClient discoveryClient;
 
     @PostMapping("/creat")
     public CommonResult creat(@RequestBody Payment payment){
@@ -44,6 +50,20 @@ public class PaymentController {
         }else{
             return new CommonResult(500,"没有对应记录,查询id:"+id,null);
         }
+    }
+
+    @GetMapping("/payment/discovery")
+    public Object discovery(){
+        List<String> services = discoveryClient.getServices();
+        for (String i:services) {
+            log.info("============================ : "+i);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance ins :
+                instances) {
+            log.info("=-==================  : "+ins.getServiceId()+ins.getHost()+ins.getPort()+ins.getUri());
+        }
+        return this.discoveryClient;
     }
 }
 
